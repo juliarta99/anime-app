@@ -1,5 +1,5 @@
 <template>
-    <div v-if="showCharacters" class="w-10/12 py-5 px-8 mx-auto mt-5 rounded-md bg-white">
+    <div v-if="showCharacters">
         <h2 class="text-lg font-bold uppercase mb-3 text-center">Karakter</h2>
         <div class="grid grid-cols-7 gap-4">
             <div v-for="character in displayedCharacters" :key="character.character.mal_id" class="p-2">
@@ -11,24 +11,35 @@
             </div>
         </div>
         <div v-if="btnText" class="flex justify-center">
-            <button class="px-3 py-1 bg-blue-500 rounded-md text-sm font-semibold" @click="showOrHideCharacters">{{ btnText }}</button>
+            <Button @click="showOrHideCharacters">{{ btnText }}</Button>
         </div>
-        <p v-if="!btnText" class="text-center">Tidak ada data karakter</p>
+        <p v-if="showEmpty" class="text-center">Tidak ada data karakter</p>
     </div>
 </template>
 
 <script>
+    import Button from './Button.vue';
     export default{
         name: 'AllCharacter',
         props: ['characters'],
         data() {
             return {
-                showCharacters: true,
                 showAllCharacters: false,
                 btnText : ''
             };
         },
+        components:{
+            Button
+        },
         computed: {
+            showCharacters() {
+                return this.$store.state.showCharacters
+            },
+            showEmpty() {
+                if(!this.btnText && this.characters.length == 0){
+                    return 1
+                } return 0
+            },
             displayedCharacters() {
                 if (this.showAllCharacters) {
                     return this.characters;
@@ -37,7 +48,6 @@
                         this.btnText = 'Tampilkan Semua'
                         return this.characters.slice(0, 14);
                     } else if(this.characters.length > 0) {
-                        this.btnText = true
                         return this.characters
                     } else {
                         return this.btnText = ''

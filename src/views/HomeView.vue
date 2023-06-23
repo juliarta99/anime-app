@@ -31,7 +31,7 @@
             Footer,
             AnimeCard: defineAsyncComponent(() => import('@/components/AnimeCard.vue')) 
         },
-        mounted() {
+        created() {
             if(!this.$store.state.search) {
                 this.$store.dispatch('fetchAnimeData')
             } else if(this.$store.state.search) {

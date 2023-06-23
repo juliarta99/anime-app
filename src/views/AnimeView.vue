@@ -14,15 +14,7 @@
         </Suspense>
         <Suspense>
             <template #default>
-                <AllCharacter :characters="characters"></AllCharacter>
-            </template>
-            <template #fallback>
-                Loadingg
-            </template>
-        </Suspense>
-        <Suspense>
-            <template #default>
-                <GalleryAnime :pictures="pictures"></GalleryAnime>
+                <OtherDetail></OtherDetail>
             </template>
             <template #fallback>
                 Loadingg
@@ -39,11 +31,10 @@
         name: 'AnimeView',
         components: {
             DetailAnime: defineAsyncComponent(() => import('@/components/DetailAnime.vue')),
-            AllCharacter: defineAsyncComponent(() => import('@/components/AllCharacter.vue')),
-            GalleryAnime: defineAsyncComponent(() => import('@/components/GalleryAnime.vue')),
+            OtherDetail: defineAsyncComponent(() => import('@/components/OtherDetail.vue')),
             ArrowLeft
         },
-        mounted() {
+        created() {
             const id = this.$route.params.id;
             this.$store.dispatch('animeById', id);
             this.$store.dispatch('animeCharacters', id);
@@ -52,12 +43,6 @@
         computed: {
             anime() {
                 return this.$store.state.anime
-            },
-            characters() {
-                return this.$store.state.characters
-            },
-            pictures() {
-                return this.$store.state.pictures
             },
             err() {
                 return this.$store.state.err

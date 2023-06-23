@@ -50,8 +50,8 @@
                 if (this.pangkas === true && this.anime.synopsis.length > maxLength) {
                     this.synopsis = this.anime.synopsis.slice(0, maxLength) + '...';
                     return this.synopsis
-                } else if(this.pangkas === true && this.anime.synopsis.length <= maxLength) {
-                    return this.textBtn = false;
+                } else if(this.pangkas === true && this.anime.synopsis.length < maxLength) {
+                    return this.textBtn = '';
                 }
                 this.synopsis = this.anime.synopsis;
                 return this.synopsis

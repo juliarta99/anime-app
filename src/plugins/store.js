@@ -1,6 +1,8 @@
 import { createStore } from "vuex";
 import axios from 'axios';
 
+const BASEURL = import.meta.env.VITE_API_ENDPOINT;
+
 const store = createStore({
     state: {
         err: '',
@@ -9,7 +11,14 @@ const store = createStore({
         selected: 1,
         search: '',
         characters: [],
-        pictures: []
+        pictures: [],
+        episodes: [],
+        recommendations: [],
+        reviews: [],
+        character: [],
+        characterPictures: [],
+        showCharacters: true,
+        showPictures: false
     },
     mutations: {
         setError(state, error) {
@@ -32,6 +41,27 @@ const store = createStore({
         },
         setPictures(state, pictures) {
             state.pictures = pictures;
+        },
+        setEpisodes(state, episodes) {
+            state.episodes = episodes;
+        },
+        setRecommendations(state, recommendations) {
+            state.recommendations = recommendations;
+        },
+        setReviews(state, reviews) {
+            state.reviews = reviews;
+        },
+        setCharacter(state, character) {
+            state.character = character;
+        },
+        setCharacterPictures(state, characterPictures) {
+            state.characterPictures = characterPictures;
+        },
+        setShowCharacters(state, showCharacters) {
+            state.showCharacters = showCharacters;
+        },
+        setShowPictures(state, showPictures) {
+            state.showPictures = showPictures;
         }
     },
     actions: {
@@ -40,11 +70,11 @@ const store = createStore({
             const selected = state.selected;
 
             if(selected === 1) {
-                apiEndPoint = 'https://api.jikan.moe/v4/top/anime?filter=bypopularity&limit=10';
+                apiEndPoint = BASEURL + 'top/anime?filter=bypopularity&limit=10';
             } else if(selected === 2) {
-                apiEndPoint = 'https://api.jikan.moe/v4/top/anime?filter=favorite&limit=10';
+                apiEndPoint = BASEURL + 'top/anime?filter=favorite&limit=10';
             } else if(selected === 3) {
-                apiEndPoint = 'https://api.jikan.moe/v4/seasons/upcoming?limit=10';
+                apiEndPoint = BASEURL + 'seasons/upcoming?limit=10';
             } else {
                 commit('setError', 'Data tidak ditemukan');
                 return;
@@ -62,7 +92,7 @@ const store = createStore({
         },
         searchDataAnime({commit, state}) {
             const value = state.search;
-            axios.get(`https://api.jikan.moe/v4/anime?q=${value}&limit=10`)
+            axios.get(BASEURL + `anime?q=${value}&limit=10`)
                 .then(res => {
                     commit('setAnimes', res.data.data);
                     commit('setError', null);
@@ -73,7 +103,7 @@ const store = createStore({
                 })
         },
         randomAnime({commit}) {
-            axios.get('https://api.jikan.moe/v4/random/anime')
+            axios.get( BASEURL + 'random/anime')
                 .then(res => {
                     commit('setAnimes', [res.data.data]);
                     commit('setError', null);
@@ -84,7 +114,7 @@ const store = createStore({
                 })
         },
         animeById({commit}, paramId) {
-            axios.get(`https://api.jikan.moe/v4/anime/${paramId}`)
+            axios.get(BASEURL + `anime/${paramId}`)
                 .then(res => {
                     commit('setAnime', [res.data.data][0]);
                     commit('setError', null);
@@ -95,7 +125,7 @@ const store = createStore({
                 })
         },
         animeCharacters({commit}, paramId) {
-            axios.get(`https://api.jikan.moe/v4/anime/${paramId}/characters`)
+            axios.get(BASEURL + `anime/${paramId}/characters`)
                 .then(res => {
                     commit('setCharacters', res.data.data);
                     commit('setError', null);
@@ -106,7 +136,7 @@ const store = createStore({
                 })
         },
         animePictures({commit}, paramId) {
-            axios.get(`https://api.jikan.moe/v4/anime/${paramId}/pictures`)
+            axios.get(BASEURL + `anime/${paramId}/pictures`)
                 .then(res => {
                     commit('setPictures', res.data.data);
                     commit('setError', null);
@@ -115,7 +145,62 @@ const store = createStore({
                     console.log(err);
                     commit('setError', err.message);
                 })  
-        }
+        },
+        animeEpisodes({commit}, paramId){
+            axios.get(BASEURL + `anime/${paramId}/episodes`)
+                .then(res => {
+                    commit('setEpisodes', res.data.data);
+                    commit('setError', null);
+                })
+                .catch(err => {
+                    console.log(err);
+                    commit('setError', err.message);
+                })
+        },     
+        animeRecommendations({commit}, paramId){
+            axios.get(BASEURL + `anime/${paramId}/recommendations`)
+                .then(res => {
+                    commit('setRecommendations', res.data.data);
+                    commit('setError', null);
+                })
+                .catch(err => {
+                    console.log(err);
+                    commit('setError', err.message);
+                })
+        },     
+        animeReviews({commit}, paramId){
+            axios.get(BASEURL + `anime/${paramId}/reviews`)
+                .then(res => {
+                    commit('setReviews', res.data.data);
+                    commit('setError', null);
+                })
+                .catch(err => {
+                    console.log(err);
+                    commit('setError', err.message);
+                })
+        },     
+        animeCharacter({commit}, paramId){
+            axios.get(BASEURL + `character/${paramId}`)
+                .then(res => {
+                    commit('setCharacter', [res.data.data]);
+                    commit('setError', null);
+                })
+                .catch(err => {
+                    console.log(err);
+                    commit('setError', err.message);
+                })
+        },     
+        animeCharacterPictures({commit}, paramId){
+            axios.get(BASEURL + `character/${paramId}/pictures`)
+                .then(res => {
+                    commit('setCharacterPictures', res.data.data);
+                    commit('setError', null);
+                })
+                .catch(err => {
+                    console.log(err);
+                    commit('setError', err.message);
+                })
+        }     
     }
 })
 
