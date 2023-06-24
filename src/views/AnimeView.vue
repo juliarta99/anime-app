@@ -38,7 +38,7 @@
             const id = this.$route.params.id;
             this.$store.dispatch('animeById', id);
             this.$store.dispatch('animeCharacters', id);
-            // this.$store.dispatch('animePictures', id);
+            // // this.$store.dispatch('animePictures', id);
         },
         computed: {
             anime() {

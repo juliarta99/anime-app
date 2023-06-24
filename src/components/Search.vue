@@ -1,10 +1,11 @@
 <template>
     <div>
-        <input type="text" name="search" autocomplete="off" v-model="search" @keyup="getDataAnimeBySearch" placeholder="Cari anime kesukaan anda" class="bg-slate-200 w-full p-1 px-3 rounded-md outline-none">
+        <input type="text" name="search" autocomplete="off" v-model="search" @input="debounceSearch" placeholder="Cari anime kesukaan anda" class="bg-slate-200 w-full p-1 px-3 rounded-md outline-none">
     </div>
 </template>
 
 <script>
+    import { debounce } from 'lodash'
     export default {
         name: 'Search',
         computed: {
@@ -15,12 +16,15 @@
                 set(value) {
                     this.$store.commit('setSearch', value)
                 }
-            }
+            },
         },
         methods: {
+            debounceSearch: debounce(function() {
+                this.getDataAnimeBySearch();
+            }, 334),
             getDataAnimeBySearch() {
-                this.$store.dispatch('searchDataAnime')
-            }
+                this.$store.dispatch('searchDataAnime');
+            },
         }
     }
 </script>

@@ -180,9 +180,9 @@ const store = createStore({
                 })
         },     
         animeCharacter({commit}, paramId){
-            axios.get(BASEURL + `character/${paramId}`)
+            axios.get(BASEURL + `characters/${paramId}`)
                 .then(res => {
-                    commit('setCharacter', [res.data.data]);
+                    commit('setCharacter', res.data.data);
                     commit('setError', null);
                 })
                 .catch(err => {
@@ -191,7 +191,7 @@ const store = createStore({
                 })
         },     
         animeCharacterPictures({commit}, paramId){
-            axios.get(BASEURL + `character/${paramId}/pictures`)
+            axios.get(BASEURL + `characters/${paramId}/pictures`)
                 .then(res => {
                     commit('setCharacterPictures', res.data.data);
                     commit('setError', null);
