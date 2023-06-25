@@ -17,8 +17,7 @@ const store = createStore({
         reviews: [],
         character: [],
         characterPictures: [],
-        showCharacters: true,
-        showPictures: false
+        otherAktif: 1
     },
     mutations: {
         setError(state, error) {
@@ -57,11 +56,8 @@ const store = createStore({
         setCharacterPictures(state, characterPictures) {
             state.characterPictures = characterPictures;
         },
-        setShowCharacters(state, showCharacters) {
-            state.showCharacters = showCharacters;
-        },
-        setShowPictures(state, showPictures) {
-            state.showPictures = showPictures;
+        setOtherAktif(state, otherAktif) {
+            state.otherAktif = otherAktif;
         }
     },
     actions: {

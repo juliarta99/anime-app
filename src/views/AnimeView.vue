@@ -53,8 +53,10 @@
         created() {
             const id = this.$route.params.id;
             this.$store.dispatch('animeById', id);
-            this.$store.dispatch('animeCharacters', id);
-            // // this.$store.dispatch('animePictures', id);
+        },
+        updated() {
+            const id = this.$route.params.id;
+            this.$store.dispatch('animeById', id);
         },
         computed: {
             anime() {

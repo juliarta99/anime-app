@@ -1,5 +1,5 @@
 <template>
-    <div v-if="showCharacters">
+    <div>
         <h2 class="text-lg font-bold uppercase mb-3 text-center">Karakter</h2>
         <div class="grid grid-cols-7 gap-4">
             <div v-for="character in displayedCharacters" :key="character.character.mal_id" class="p-2">
@@ -32,9 +32,6 @@
             Button
         },
         computed: {
-            showCharacters() {
-                return this.$store.state.showCharacters
-            },
             showEmpty() {
                 if(!this.btnText && this.characters.length == 0){
                     return 1
