@@ -1,8 +1,11 @@
 <template>
     <div class="w-full h-full">
-        <router-link to="/">
-            <ArrowLeft>Kembali ke Beranda</ArrowLeft>
-        </router-link>
+        <div class="flex justify-between">
+            <ArrowLeft @click="$router.back()" class="cursor-pointer">Kembali</ArrowLeft>
+            <router-link to="/">
+                <IconHome class="cursor-pointer"></IconHome>
+            </router-link>
+        </div>
         <p v-if="err" class="text-center mt-4">{{ err }}</p>
         <Suspense>
             <template #default>
@@ -26,12 +29,25 @@
 <script>
     import {defineAsyncComponent} from 'vue'
     import ArrowLeft from '@/components/icons/ArrowLeft.vue'
+    import IconHome from '@/components/icons/Home.vue'
+
+    const DetailAnime = defineAsyncComponent(async () => {
+                            await new Promise(resolve => setTimeout(resolve, 1000));
+                            const Component = await import('@/components/DetailAnime.vue');
+                            return Component
+                        });
+    const OtherDetail = defineAsyncComponent(async () => {
+                            await new Promise(resolve => setTimeout(resolve, 1000));
+                            const Component = await import('@/components/OtherDetail.vue');
+                            return Component
+                        });
 
     export default{
         name: 'AnimeView',
         components: {
-            DetailAnime: defineAsyncComponent(() => import('@/components/DetailAnime.vue')),
-            OtherDetail: defineAsyncComponent(() => import('@/components/OtherDetail.vue')),
+            DetailAnime,
+            OtherDetail,
+            IconHome,
             ArrowLeft
         },
         created() {

@@ -48,6 +48,7 @@
                         this.btnText = 'Tampilkan Semua'
                         return this.characters.slice(0, 14);
                     } else if(this.characters.length > 0) {
+                        this.btnText = ''
                         return this.characters
                     } else {
                         return this.btnText = ''
