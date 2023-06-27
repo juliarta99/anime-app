@@ -6,15 +6,15 @@
                 <img :src="picture.jpg.image_url" class="object-cover">
             </div>
         </div>
-        <div v-if="btnText" class="flex justify-center mt-3">
-            <Button @click="showOrHidePictures">{{ btnText }}</Button>
+        <div v-if="showBtn" class="flex justify-center mt-3">
+            <Button @click="showOrHidePictures">{{ handleText }}</Button>
         </div>
         <p v-if="showEmpty" class="text-center mt-2">Tidak ada data gambar karakter</p>
     </div>
 </template>
 
 <script>
-    import Button from './Button.vue';
+    import Button from '@/components/Button.vue';
 
     export default{
         name: "GalleryCharacter", 
@@ -22,18 +22,17 @@
         data() {
             return {
                 showAllPictures: false,
-                btnText : ''
+                readMore : true,
+                showBtn : true,
+                maxLength: 7
             };
         },
         components:{
             Button
         },
         computed: {
-            showPictures() {
-                return this.$store.state.showPictures
-            },
             showEmpty() {
-                if(!this.btnText && this.characterPictures.length == 0){
+                if( this.showBtn === false  && this.characterPictures.length === 0){
                     return 1
                 } return 0
             },
@@ -41,15 +40,22 @@
                 if (this.showAllPictures) {
                     return this.characterPictures;
                 } else {
-                    if(this.characterPictures.length > 7){
-                        this.btnText = 'Tampilkan Semua'
-                        return this.characterPictures.slice(0, 7);
+                    if(this.characterPictures.length > this.maxLength){
+                        this.showBtn = true
+                        return this.characterPictures.slice(0, this.maxLength);
                     } else if(this.characterPictures.length > 0) {
-                        this.btnText = ''
+                        this.showBtn = false
                         return this.characterPictures
-                    } else {
-                        return this.btnText = ''
+                    } else if(this.characterPictures.length === 0) {
+                        return this.showBtn = false
                     }
+                }
+            },
+            handleText() {
+                if(this.readMore === true) {
+                    return "Tampilkan Semua"
+                } else if(this.readMore === false) {
+                    return "Sembunyikan"
                 }
             }
         },
@@ -57,10 +63,10 @@
             showOrHidePictures() {
                 if(this.showAllPictures === false) {
                     this.showAllPictures = true
-                    this.btnText = 'Sembunyikan'
-                } else {
-                    this.btnText = 'Tampilkan Semua'
+                    this.readMore = false
+                } else if(this.showAllPictures === true) {
                     this.showAllPictures = false
+                    this.readMore = true
                 }
             }
         }

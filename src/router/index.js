@@ -2,6 +2,7 @@ import { createRouter, createWebHistory} from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import AnimeView from '@/views/AnimeView.vue'
 import CharacterView from '@/views/CharacterView.vue'
+import EpisodeView from '@/views/EpisodeView.vue'
 
 const routes = [
     {
@@ -18,6 +19,11 @@ const routes = [
         path: '/character/:id',
         name: 'getCharacter', 
         component: CharacterView
+    },
+    {
+        path: '/anime/:idAnime/episode/:idEpisode',
+        name: 'getEpisode', 
+        component: EpisodeView
     }
 ]
 

@@ -13,6 +13,7 @@ const store = createStore({
         characters: [],
         pictures: [],
         episodes: [],
+        episode: [],
         recommendations: [],
         reviews: [],
         character: [],
@@ -58,6 +59,9 @@ const store = createStore({
         },
         setOtherAktif(state, otherAktif) {
             state.otherAktif = otherAktif;
+        },
+        setEpisode(state, episode) {
+            state.episode = episode;
         }
     },
     actions: {
@@ -190,6 +194,17 @@ const store = createStore({
             axios.get(BASEURL + `characters/${paramId}/pictures`)
                 .then(res => {
                     commit('setCharacterPictures', res.data.data);
+                    commit('setError', null);
+                })
+                .catch(err => {
+                    console.log(err);
+                    commit('setError', err.message);
+                })
+        },     
+        animeEpisode({commit}, {idAnime, idEpisode}){
+            axios.get(BASEURL + `anime/${idAnime}/episodes/${idEpisode}`)
+                .then(res => {
+                    commit('setEpisode', res.data.data);
                     commit('setError', null);
                 })
                 .catch(err => {

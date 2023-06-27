@@ -8,7 +8,7 @@
             </div>
             <div class="w-3/6" v-if="character.about">
                 <p v-html="formatText(cekAbout)" class="text-sm text-justify"></p>
-                <button v-if="textBtn" class="text-blue-500 text-sm" @click="showOrExpandSynopsis">{{ textBtn }}</button>
+                <button v-if="showBtn" class="text-blue-500 text-sm" @click="showOrExpandAbout">{{ handleText }}</button>
             </div>
         </div>
     </div>
@@ -20,41 +20,39 @@
         props: ['character'],
         data() {
             return{
-                about: '',
-                pangkas: true,
-                btnReadMore : true,
-                textBtn: ''
+                maxLength: 500,
+                readMore: true,
+                showBtn: true,
             }
         },
         computed: {
             cekAbout() {
-                const maxLength = 500; 
-                if (this.pangkas === true && this.character.about.length > maxLength) {
-                    this.about = this.character.about.slice(0, maxLength) + '...';
-                    this.textBtn = 'selengkapnya';
-                    return this.about
-                } else if(this.pangkas === true && this.character.about.length < maxLength) {
-                    this.about = this.character.about;
-                    this.textBtn = '';
-                    return this.about;
+                if (this.readMore === true && this.character.about.length > this.maxLength) {
+                    this.showBtn = true
+                    return this.character.about.slice(0, this.maxLength) + '...'; 
+                } else if(this.character.about.length < this.maxLength) {
+                    this.showBtn = false
+                    return this.character.about;
                 }
-                this.about = this.character.about;
-                return this.about
+                return this.character.about; 
+            },
+            handleText() {
+                if(this.readMore === true) {
+                    return "selengkapnya"
+                } else if(this.readMore === false) {
+                    return "tutup"
+                }
             }
         },
         methods: {
             formatText(text) {
                 return text.replace(/\n/g, '<br>');
             },
-            showOrExpandSynopsis() {
-                if(this.btnReadMore === true){
-                    this.btnReadMore = false
-                    this.pangkas = false
-                    this.textBtn = "tutup"
-                } else {
-                    this.btnReadMore = true
-                    this.pangkas = true
-                    this.textBtn = "selengkapnya"
+            showOrExpandAbout() {
+                if(this.readMore === true){
+                    this.readMore = false
+                } else if(this.readMore === false) {
+                    this.readMore = true
                 }
             }
         }

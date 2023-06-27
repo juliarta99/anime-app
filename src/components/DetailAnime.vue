@@ -22,54 +22,52 @@
                 </div>
             </div>
         </div>
-        <p class="text-justify text-sm">{{ cekSynopsis }} <button v-if="textBtn" class="text-blue-500 text-sm" @click="showOrExpandSynopsis">{{ textBtn }}</button></p>
+        <p class="text-justify text-sm">{{ cekSynopsis }} <button v-if="showBtn" class="text-blue-500 text-sm" @click="showOrExpandSynopsis">{{ handleText }}</button></p>
     </div>
-    <!-- <Trailer :animeTrailer="anime.trailer"></Trailer> -->
+    <Trailer :animeTrailer="anime.trailer"></Trailer>
 </template>
 
 <script>
-    // import Trailer from '@/components/Trailer.vue'
+    import Trailer from '@/components/Trailer.vue'
 
     export default{
         name: 'DetailAnime',
-        // components: {
-        //     Trailer
-        // },
+        components: {
+            Trailer
+        },
         data() {
             return{
-                synopsis: '',
-                pangkas: true,
-                btnReadMore: true,
-                textBtn: ''
+                maxLength: 500,
+                readMore: true,
+                showBtn: true,
             }
         },
         props: ['anime'],
         computed: {
-            cekSynopsis() {
-                const maxLength = 500; 
-                if (this.pangkas === true && this.anime.synopsis.length > maxLength) {
-                    this.synopsis = this.anime.synopsis.slice(0, maxLength) + '...';
-                    this.textBtn = 'selengkapnya';
-                    return this.synopsis
-                } else if(this.pangkas === true && this.anime.synopsis.length < maxLength) {
-                    this.synopsis = this.anime.synopsis;
-                    this.textBtn = '';
-                    return this.synopsis;
+            cekSynopsis() { 
+                if (this.readMore === true && this.anime.synopsis.length > this.maxLength) {
+                    this.showBtn = true
+                    return this.anime.synopsis.slice(0, this.maxLength) + '...'; 
+                } else if(this.anime.synopsis.length < this.maxLength) {
+                    this.showBtn = false
+                    return this.anime.synopsis;
                 }
-                this.synopsis = this.anime.synopsis;
-                return this.synopsis
+                return this.anime.synopsis; 
+            },
+            handleText() {
+                if(this.readMore === true) {
+                    return "selengkapnya"
+                } else if(this.readMore === false) {
+                    return "tutup"
+                }
             }
         },
         methods: {
             showOrExpandSynopsis() {
-                if(this.btnReadMore === true){
-                    this.btnReadMore = false
-                    this.pangkas = false
-                    this.textBtn = "tutup"
-                } else {
-                    this.btnReadMore = true
-                    this.pangkas = true
-                    this.textBtn = "selengkapnya"
+                if(this.readMore === true){
+                    this.readMore = false
+                } else if(this.readMore === false) {
+                    this.readMore = true
                 }
             }
         },
