@@ -24,17 +24,17 @@
         </div>
         <p class="text-justify text-xs md:text-sm">{{ cekSynopsis }} <button v-if="showBtn" class="text-blue-500 text-sm" @click="showOrExpandSynopsis">{{ handleText }}</button></p>
     </div>
-    <Trailer :animeTrailer="anime.trailer"></Trailer>
+    <!-- <Trailer :animeTrailer="anime.trailer"></Trailer> -->
 </template>
 
 <script>
-    import Trailer from '@/components/Trailer.vue'
+    // import Trailer from '@/components/Trailer.vue'
 
     export default{
         name: 'DetailAnime',
-        components: {
-            Trailer
-        },
+        // components: {
+        //     Trailer
+        // },
         data() {
             return{
                 maxLength: 500,
