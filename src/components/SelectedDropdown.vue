@@ -1,5 +1,5 @@
 <template>
-     <select class="cursor-pointer bg-blue-200 rounded-md p-1 outline-none" v-model="selected" @change="getDataAnime">
+     <select class="cursor-pointer bg-blue-200 rounded-md p-1 outline-none text-sm lg:text-base" v-model="selected" @change="getDataAnime">
         <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>
     </select>
 </template>

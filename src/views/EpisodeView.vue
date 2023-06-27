@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex justify-between">
-            <ArrowLeft @click="$router.back()" class="cursor-pointer">Kembali</ArrowLeft>
+            <ArrowLeft @click="$router.back()" class="cursor-pointer text-sm md:text-base">Kembali</ArrowLeft>
             <router-link to="/">
                 <IconHome class="cursor-pointer"></IconHome>
             </router-link>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type="text" name="search" autocomplete="off" v-model="search" @keyup="debounceSearch" placeholder="Cari anime kesukaan anda" class="bg-slate-200 w-full p-1 px-3 rounded-md outline-none">
+        <input type="text" name="search" autocomplete="off" v-model="search" @keyup="debounceSearch" placeholder="Cari anime kesukaan anda" class="bg-slate-200 w-full p-1 px-3 rounded-md outline-none lg:text-base text-sm">
     </div>
 </template>
 

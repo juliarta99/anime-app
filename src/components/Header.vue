@@ -1,9 +1,11 @@
 <template>
     <div class="grid grid-header gap-3">
-        <router-link :to="{name: 'Home'}" class="font-bold text-2xl uppercase">Anime App</router-link>
+        <router-link :to="{name: 'Home'}" class="font-bold text-lg xl:text-2xl lg:text-xl uppercase">Anime App</router-link>
         <Search></Search>
-        <ButtonRandom></ButtonRandom>
-        <SelectedDropdown :options="dropdownOptions"></SelectedDropdown>
+        <div class="flex gap-3 sm:flex-nowrap flex-wrap">
+            <ButtonRandom></ButtonRandom>
+            <SelectedDropdown :options="dropdownOptions"></SelectedDropdown>
+        </div>
     </div>
 </template>
 
@@ -32,7 +34,9 @@
 </script>
 
 <style scoped>
-.grid-header{
-    grid-template-columns: 1fr 3fr 1fr 1fr;
+@media (min-width:800px) {
+    .grid-header{
+        grid-template-columns: .9fr 3fr 1.2fr;
+    }
 }
 </style>

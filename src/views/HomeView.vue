@@ -8,7 +8,7 @@
             </div>
         </template>
         <template #fallback>
-            <div class="grid grid-cols-5 gap-4 my-6">
+            <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 my-6">
                 <div v-for="index in 10" :key="index" class="rounded-md shadow-md p-3 bg-white">
                     <div class="h-80 w-full rounded-md bg-slate-100 animate-pulse mb-2"></div>
                     <div class="h-3 w-4/5 bg-slate-100 animate-pulse"></div>
