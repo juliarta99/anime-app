@@ -1,6 +1,6 @@
 <template>
-    <div class="w-10/12 py-5 px-8 mx-auto mt-5 rounded-md bg-white">
-        <div class="flex justify-center gap-2 mb-5">
+    <div class="w-full md:w-10/12 py-5 px-8 mx-auto mt-5 rounded-md bg-white">
+        <div class="flex justify-center gap-2 mb-5 flex-wrap md:text-base text-sm">
             <Button v-for="btn in btnValue" :key="btn.id" @click="handleClick(btn.id)">{{ btn.value }}</Button>
         </div>
         <AllCharacter :characters="displayed(characters)" v-if="otherAktif === 1"></AllCharacter>

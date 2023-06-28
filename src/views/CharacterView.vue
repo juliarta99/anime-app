@@ -6,7 +6,7 @@
                 <IconHome class="cursor-pointer"></IconHome>
             </router-link>
         </div>
-        <div class="w-10/12 py-5 px-8 mx-auto mt-5 rounded-md bg-white">
+        <div class="w-full md:w-10/12 py-5 px-8 mx-auto mt-5 rounded-md bg-white">
             <p v-if="err" class="text-center mt-4">{{ err }}</p>
             <Suspense>
                 <template #default>

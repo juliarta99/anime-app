@@ -1,7 +1,7 @@
 <template>
     <div>
         <h5 class="font-bold text-lg text-center mb-2">Gallery</h5>
-        <div class="grid grid-cols-7 gap-4">
+        <div class="grid lg:grid-cols-7 md:grid-cols-5 sm:grid-cols-4 grid-cols-3 grid-cols-xs gap-4">
             <div v-for="picture in displayedPictures" :key="picture">
                 <img :src="picture.jpg.image_url" class="object-cover">
             </div>
