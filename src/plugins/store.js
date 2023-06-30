@@ -18,7 +18,8 @@ const store = createStore({
         reviews: [],
         character: [],
         characterPictures: [],
-        otherAktif: 1
+        otherAktif: 1,
+        showSlider: false
     },
     mutations: {
         setError(state, error) {
@@ -62,6 +63,9 @@ const store = createStore({
         },
         setEpisode(state, episode) {
             state.episode = episode;
+        },
+        setShowSlider(state, showSlider) {
+            state.showSlider = showSlider;
         }
     },
     actions: {
@@ -116,7 +120,7 @@ const store = createStore({
         animeById({commit}, paramId) {
             axios.get(BASEURL + `anime/${paramId}`)
                 .then(res => {
-                    commit('setAnime', [res.data.data][0]);
+                    commit('setAnime', res.data.data);
                     commit('setError', null);
                 })            
                 .catch(err => {

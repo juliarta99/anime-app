@@ -1,6 +1,6 @@
 <template>
     <div class="grid grid-header gap-3">
-        <router-link :to="{name: 'Home'}" class="font-bold text-lg xl:text-2xl lg:text-xl uppercase">Anime App</router-link>
+        <router-link :to="{name: 'Home'}" class="font-bold text-xl xl:text-2xl uppercase">Anime App</router-link>
         <Search></Search>
         <div class="flex gap-3 sm:flex-nowrap flex-wrap">
             <ButtonRandom></ButtonRandom>

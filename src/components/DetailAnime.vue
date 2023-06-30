@@ -4,7 +4,10 @@
         <p v-if="!anime.title_english" class="font-bold uppercase text-lg text-center mb-3">{{ anime.title }}</p>
         <div class="flex-col md:flex-row flex gap-4 mb-4 w-full justify-center">
             <div class="relative w-max md:mb-0 mb-2 mx-auto md:mx-0 w-xs">
-                <p class="rounded-tr-sm absolute right-0 bg-yellow-200 p-2 font-semibold text-md">{{ anime.score }}</p>
+                <div class="rounded-tr-sm absolute right-0 flex items-center gap-1 bg-yellow-200 p-2 font-semibold text-md">
+                    <Star></Star>
+                    <p>{{ anime.score }}</p>
+                </div>
                 <img class="rounded-md object-cover w-xs" :src="anime.images.webp.image_url">
             </div>
             <div class="sm:text-center md:text-left text-sm md:text-base">
@@ -29,12 +32,14 @@
 
 <script>
     // import Trailer from '@/components/Trailer.vue'
+    import Star from '@/components/icons/Star.vue';
 
     export default{
         name: 'DetailAnime',
-        // components: {
+        components: {
         //     Trailer
-        // },
+            Star
+        },
         data() {
             return{
                 maxLength: 500,
