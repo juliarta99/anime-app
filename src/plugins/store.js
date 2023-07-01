@@ -19,7 +19,8 @@ const store = createStore({
         character: [],
         characterPictures: [],
         otherAktif: 1,
-        showSlider: false
+        showSlider: false,
+        imageAktif: 0
     },
     mutations: {
         setError(state, error) {
@@ -66,6 +67,9 @@ const store = createStore({
         },
         setShowSlider(state, showSlider) {
             state.showSlider = showSlider;
+        },
+        setImageAktif(state, imageAktif) {
+            state.imageAktif = imageAktif;
         }
     },
     actions: {

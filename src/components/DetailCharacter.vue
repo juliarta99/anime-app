@@ -7,7 +7,7 @@
                     <Favorit></Favorit>
                     <p>{{ character.favorites }}</p>
                 </div>
-                <img :src="character.images.webp.image_url" :alt="character.name" class="object-cover w-xs">
+                <img :src="character.images.webp.image_url" :alt="character.name" class="object-cover h-80 w-xs">
             </div>
             <div class="w-full sm:w-3/6 text-xs md:text-sm" v-if="character.about">
                 <p v-html="formatText(cekAbout)" class="text-justify"></p>

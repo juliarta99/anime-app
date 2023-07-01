@@ -6,9 +6,10 @@
             <div class="relative w-max md:mb-0 mb-2 mx-auto md:mx-0 w-xs">
                 <div class="rounded-tr-sm absolute right-0 flex items-center gap-1 bg-yellow-200 p-2 font-semibold text-md">
                     <Star></Star>
-                    <p>{{ anime.score }}</p>
+                    <p v-if="anime.score">{{ anime.score }}</p>
+                    <p v-if="!anime.score">0.0</p>
                 </div>
-                <img class="rounded-md object-cover w-xs" :src="anime.images.webp.image_url">
+                <img class="rounded-md h-80 object-cover w-xs" :src="anime.images.webp.image_url">
             </div>
             <div class="sm:text-center md:text-left text-sm md:text-base">
                 <p>Ranking : #{{ anime.rank }}</p>
