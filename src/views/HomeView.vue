@@ -44,6 +44,9 @@
             },
             err() {
                 return this.$store.state.err
+            },
+            pagination() {
+                return this.$store.state.pagination
             }
         }
     }

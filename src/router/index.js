@@ -36,7 +36,7 @@ const routes = [
         meta: {
             title: 'Episode'
         }
-    }
+    },
 ]
 
 

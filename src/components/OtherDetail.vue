@@ -1,14 +1,14 @@
 <template>
     <div class="w-full md:w-10/12 py-5 px-8 mx-auto mt-5 rounded-md bg-white">
         <div class="flex justify-center gap-2 mb-5 flex-wrap md:text-base text-sm">
-            <Button v-for="btn in btnValue" :key="btn.id" @click="handleClick(btn.id)">{{ btn.value }}</Button>
+            <Button v-for="btn in btnValue" :key="btn.id" @click="handleClick(btn.id)" :class="(otherAktif === btn.id) ? 'bg-yellow-300' : ''">{{ btn.value }}</Button>
         </div>
-        <AllCharacter :characters="displayed(characters)" v-if="otherAktif === 1"></AllCharacter>
-        <GalleryAnime :pictures="displayed(pictures)" v-if="otherAktif === 2"></GalleryAnime>
-        <AllEpisode :episodes="displayed(episodes)" v-if="otherAktif === 3"></AllEpisode>
-        <AnimeReview :reviews="displayed(reviews)" v-if="otherAktif === 4"></AnimeReview >
-        <AnimeRecommendations :recommendations="displayed(recommendations)" v-if="otherAktif === 5"></AnimeRecommendations>
-        <div v-if="showBtn" class="flex justify-center mt-4">
+        <AllCharacter :characters="displayed(characters, 14)" v-if="otherAktif === 1"></AllCharacter>
+        <GalleryAnime :pictures="displayed(pictures, 14)" v-if="otherAktif === 2"></GalleryAnime>
+        <AllEpisode :episodes="displayed(episodes, 12)" v-if="otherAktif === 3"></AllEpisode>
+        <AnimeReview :reviews="displayed(reviews, 1)" v-if="otherAktif === 4"></AnimeReview >
+        <AnimeRecommendations :recommendations="displayed(recommendations, 14)" v-if="otherAktif === 5"></AnimeRecommendations>
+        <div v-if="showBtn && otherAktif != 4" class="flex justify-center mt-4">
             <Button @click="showOrHide">{{ handleTextBtn }}</Button>
         </div>
         <p v-if="showEmpty(handleValue)" class="text-center">Tidak ada data {{ handleText }}</p>
@@ -37,7 +37,6 @@
                 showAll: false,
                 readMore : true,
                 showBtn : true,
-                maxLength: 14
             }
         },
         created() {
@@ -139,17 +138,18 @@
                 this.otherAktif = val
             },
             showEmpty(val) {
-                if( this.showBtn === false  && val.length === 0){
+                if( (this.showBtn === false || this.otherAktif === 4) && val.length === 0){
                     return 1
                 } return 0
             },
-            displayed(val) {
-                if (this.showAll) {
+            displayed(val, length) {
+                if (this.showAll && val.length > length || this.otherAktif === 4) {
+                    this.showBtn = true
                     return val;
                 } else {
-                    if(val.length > this.maxLength){
+                    if(val.length > length){
                         this.showBtn = true
-                        return val.slice(0, this.maxLength);
+                        return val.slice(0, length);
                     } else if(val.length > 0) {
                         this.showBtn = false
                         return val

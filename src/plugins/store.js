@@ -6,6 +6,7 @@ const BASEURL = import.meta.env.VITE_API_ENDPOINT;
 const store = createStore({
     state: {
         err: '',
+        pagination: [],
         animes: [],
         anime: [],
         selected: 1,
@@ -25,6 +26,9 @@ const store = createStore({
     mutations: {
         setError(state, error) {
             state.err = error;
+        },
+        setPagination(state, pagination) {
+            state.pagination = pagination;
         },
         setAnimes(state, animes) {
             state.animes = animes;
@@ -91,6 +95,7 @@ const store = createStore({
             axios.get(apiEndPoint)
                 .then(res => {
                     commit('setAnimes', res.data.data);
+                    commit('setPagination', res.data.pagination);
                     commit('setError', null);
                 })            
                 .catch(err => {
@@ -103,6 +108,7 @@ const store = createStore({
             axios.get(BASEURL + `anime?q=${value}&limit=10`)
                 .then(res => {
                     commit('setAnimes', res.data.data);
+                    commit('setPagination', res.data.pagination);
                     commit('setError', null);
                 })            
                 .catch(err => {
@@ -158,6 +164,7 @@ const store = createStore({
             axios.get(BASEURL + `anime/${paramId}/episodes`)
                 .then(res => {
                     commit('setEpisodes', res.data.data);
+                    commit('setPagination', res.data.pagination);
                     commit('setError', null);
                 })
                 .catch(err => {
@@ -180,6 +187,7 @@ const store = createStore({
             axios.get(BASEURL + `anime/${paramId}/reviews`)
                 .then(res => {
                     commit('setReviews', res.data.data);
+                    commit('setPagination', res.data.pagination);
                     commit('setError', null);
                 })
                 .catch(err => {
