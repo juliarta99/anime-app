@@ -9,7 +9,7 @@
             :autoplay="autoplay"
             class="w-11/12 md:w-2/3 lg:w-1/2"
         >
-            <swiper-slide v-for="review in reviews" :key="review.mal_id" class="pb-5">
+            <swiper-slide v-for="review in reviews" :key="review.mal_id" class="pb-10 md:pb-5">
                 <img :src="review.user.images.webp.image_url" :alt="review.user.username" class="w-20 object-cover h-20 rounded-full mx-auto">
                 <h5 class="font-semibold text-md text-center">{{ review.user.username }}</h5>
                 <div v-for="(tag, index) in review.tags" :key="index" class="flex justify-center">

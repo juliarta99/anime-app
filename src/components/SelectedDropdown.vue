@@ -15,7 +15,7 @@
                 set(value) {
                     this.$store.commit('setSelected', value);
                 }
-            }   
+            },   
         },
         props : ['options'],
         methods: {

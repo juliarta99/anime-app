@@ -7,6 +7,7 @@ const store = createStore({
     state: {
         err: '',
         pagination: [],
+        pageAktif: 1,
         animes: [],
         anime: [],
         selected: 1,
@@ -29,6 +30,9 @@ const store = createStore({
         },
         setPagination(state, pagination) {
             state.pagination = pagination;
+        },
+        setPageAktif(state, pageAktif) {
+            state.pageAktif = pageAktif;
         },
         setAnimes(state, animes) {
             state.animes = animes;
@@ -82,11 +86,11 @@ const store = createStore({
             const selected = state.selected;
 
             if(selected === 1) {
-                apiEndPoint = BASEURL + 'top/anime?filter=bypopularity&limit=10';
+                apiEndPoint = BASEURL + `top/anime?filter=bypopularity&limit=10&page=` + state.pageAktif;
             } else if(selected === 2) {
-                apiEndPoint = BASEURL + 'top/anime?filter=favorite&limit=10';
+                apiEndPoint = BASEURL + `top/anime?filter=favorite&limit=10&page=` + state.pageAktif;
             } else if(selected === 3) {
-                apiEndPoint = BASEURL + 'seasons/upcoming?limit=10';
+                apiEndPoint = BASEURL + `seasons/upcoming?limit=10&page=` + state.pageAktif;
             } else {
                 commit('setError', 'Data tidak ditemukan');
                 return;
@@ -120,6 +124,7 @@ const store = createStore({
             axios.get( BASEURL + 'random/anime')
                 .then(res => {
                     commit('setAnimes', [res.data.data]);
+                    commit('setPagination', null);
                     commit('setError', null);
                 })            
                 .catch(err => {

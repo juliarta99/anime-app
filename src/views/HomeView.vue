@@ -16,7 +16,15 @@
             </div>
         </template>
     </Suspense>
-    <Footer></Footer>
+    <Suspense v-if="pagination">
+        <template #default>
+            <Pagination></Pagination>
+        </template>
+        <template #fallback>
+            loading
+        </template>
+    </Suspense>
+    <Footer class="mt-5"></Footer>
 </template>
 
 <script>
@@ -29,14 +37,20 @@
         components: {
             Header,
             Footer,
-            AnimeCard: defineAsyncComponent(() => import('@/components/AnimeCard.vue')) 
+            AnimeCard: defineAsyncComponent(() => import('@/components/AnimeCard.vue')),
+            Pagination: defineAsyncComponent(() => import('@/components/Pagination.vue')) 
         },
         created() {
+            this.cekPagination()
+            // get data
             if(!this.$store.state.search) {
                 this.$store.dispatch('fetchAnimeData')
             } else if(this.$store.state.search) {
                 this.$store.dispatch('searchDataAnime')
             }
+        },
+        updated() {
+            this.cekPagination()
         },
         computed: {
             animes() {
@@ -47,7 +61,27 @@
             },
             pagination() {
                 return this.$store.state.pagination
+            },
+            pageAktif: {
+                get() {
+                    return this.$store.state.pageAktif;
+                },
+                set(value) {
+                    this.$store.commit('setPageAktif', value);
+                }
+            } 
+        },
+        methods: {
+            cekPagination() {
+                // cek page aktif
+                if(this.pagination){
+                    if(this.pageAktif > this.pagination.last_visible_page) {
+                        this.pageAktif = this.pagination.last_visible_page
+                    } else if(this.pageAktif < 1) {
+                        this.pageAktif = 1
+                    } 
+                }
             }
-        }
+        },
     }
 </script>
