@@ -7,6 +7,7 @@
             :pagination="{clickable: true}"
             :loop="loop"
             :autoplay="autoplay"
+            :initialSlide="0"
             class="w-11/12 md:w-2/3 lg:w-1/2"
         >
             <swiper-slide v-for="review in reviews" :key="review.mal_id" class="pb-10 md:pb-5">
@@ -18,6 +19,7 @@
                 <p class="text-xs text-justify">{{ pangkasReview(review.review) }}</p>
             </swiper-slide>
         </swiper>
+        <PaginationNextPrevious v-if="pagination.last_visible_page > 1"></PaginationNextPrevious>
     </div>
 </template>
 
@@ -26,9 +28,16 @@
     import { Swiper, SwiperSlide } from 'swiper/vue';
     import 'swiper/css';
     import 'swiper/css/pagination';
+    import PaginationNextPrevious from '@/components/PaginationNextPrevious.vue';
+
     export default{
         name: 'AnimeReview',
         props: ['reviews'],
+        computed: {
+            pagination() {
+                return this.$store.state.pagination
+            }
+        },
         data() {
             return{
                 pangkas: true,
@@ -52,6 +61,7 @@
         components: {
             Swiper,
             SwiperSlide,
+            PaginationNextPrevious
         },
         setup() {
             return {

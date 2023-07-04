@@ -13,16 +13,24 @@
                 </router-link>
             </div>
         </div>
+        <Pagination v-if="pagination.last_visible_page > 1"></Pagination>
     </div>
 </template>
 
 <script>
+    import Pagination from '@/components/PaginationNextPrevious.vue';
     import Star from '@/components/icons/Star.vue';
     export default{
         name: 'AllEpisode',
         components: {
-            Star
+            Star,
+            Pagination
         },  
-        props: ['episodes']
+        props: ['episodes'],
+        computed:{
+            pagination() {
+                return this.$store.state.pagination
+            }
+        }
     }
 </script>

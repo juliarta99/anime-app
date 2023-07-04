@@ -68,6 +68,10 @@
     .image-swiper{
         animation: show .5s;
     }
+    .swiper-button-next,
+    .swiper-button-prev{
+        color: rgb(188, 188, 248);
+    }
     @keyframes show {
         0%{
             opacity: 0;

@@ -51,6 +51,7 @@
         },
         updated() {
             this.cekPagination()
+            console.log('upadate')
         },
         computed: {
             animes() {

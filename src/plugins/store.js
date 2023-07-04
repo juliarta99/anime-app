@@ -86,11 +86,11 @@ const store = createStore({
             const selected = state.selected;
 
             if(selected === 1) {
-                apiEndPoint = BASEURL + `top/anime?filter=bypopularity&limit=10&page=` + state.pageAktif;
+                apiEndPoint = BASEURL + `top/anime?filter=bypopularity&limit=10&page=${state.pageAktif}`;
             } else if(selected === 2) {
-                apiEndPoint = BASEURL + `top/anime?filter=favorite&limit=10&page=` + state.pageAktif;
+                apiEndPoint = BASEURL + `top/anime?filter=favorite&limit=10&page=${state.pageAktif}`;
             } else if(selected === 3) {
-                apiEndPoint = BASEURL + `seasons/upcoming?limit=10&page=` + state.pageAktif;
+                apiEndPoint = BASEURL + `seasons/upcoming?limit=10&page=${state.pageAktif}`;
             } else {
                 commit('setError', 'Data tidak ditemukan');
                 return;
@@ -109,7 +109,7 @@ const store = createStore({
         },
         searchDataAnime({commit, state}) {
             const value = state.search;
-            axios.get(BASEURL + `anime?q=${value}&limit=10`)
+            axios.get(BASEURL + `anime?q=${value}&limit=10&page=${state.pageAktif}`)
                 .then(res => {
                     commit('setAnimes', res.data.data);
                     commit('setPagination', res.data.pagination);
@@ -165,8 +165,8 @@ const store = createStore({
                     commit('setError', err.message);
                 })  
         },
-        animeEpisodes({commit}, paramId){
-            axios.get(BASEURL + `anime/${paramId}/episodes`)
+        animeEpisodes({commit, state}, paramId){
+            axios.get(BASEURL + `anime/${paramId}/episodes?page=${state.pageAktif}`)
                 .then(res => {
                     commit('setEpisodes', res.data.data);
                     commit('setPagination', res.data.pagination);
@@ -188,8 +188,8 @@ const store = createStore({
                     commit('setError', err.message);
                 })
         },     
-        animeReviews({commit}, paramId){
-            axios.get(BASEURL + `anime/${paramId}/reviews`)
+        animeReviews({commit, state}, paramId){
+            axios.get(BASEURL + `anime/${paramId}/reviews?page=${state.pageAktif}`)
                 .then(res => {
                     commit('setReviews', res.data.data);
                     commit('setPagination', res.data.pagination);
