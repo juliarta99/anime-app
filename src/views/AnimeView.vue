@@ -12,7 +12,27 @@
                 <DetailAnime :anime="anime"></DetailAnime>
             </template>
             <template #fallback>
-                Loadingg
+                <div class="md:w-10/12 w-full py-5 px-8 mx-auto mt-5 rounded-md bg-white">
+                    <div class="bg-slate-100 animate-pulse rounded-sm h-5 w-1/2 mx-auto"></div>
+                    <div class="flex-col md:flex-row flex gap-4 my-4 w-full justify-center">
+                        <div class="bg-slate-100 animate-pulse rounded-md h-80 w-64 mx-auto"></div>
+                        <div class="w-full">
+                            <div class="bg-slate-100 animate-pulse mt-1 rounded-sm h-5 w-full"></div>
+                            <div class="bg-slate-100 animate-pulse mt-1 rounded-sm h-5 w-full"></div>
+                            <div class="bg-slate-100 animate-pulse mt-1 rounded-sm h-5 w-full"></div>
+                            <div class="bg-slate-100 animate-pulse mt-1 rounded-sm h-5 w-full"></div>
+                            <div class="bg-slate-100 animate-pulse mt-1 rounded-sm h-5 w-full"></div>
+                            <div class="bg-slate-100 animate-pulse mt-1 rounded-sm h-5 w-full"></div>
+                            <div class="bg-slate-100 animate-pulse mt-1 rounded-sm h-5 w-full"></div>
+                            <div class="flex gap-2 sm:justify-center md:justify-normal mt-2 flex-wrap">
+                                <div class="bg-slate-100 animate-pulse rounded-md h-8 w-20"></div>
+                                <div class="bg-slate-100 animate-pulse rounded-md h-8 w-20"></div>
+                                <div class="bg-slate-100 animate-pulse rounded-md h-8 w-20"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-100 animate-pulse rounded-sm h-20 w-full"></div>
+                </div>
             </template>
         </Suspense>
         <Suspense>

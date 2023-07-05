@@ -1,20 +1,16 @@
 <template>
-    <div class="flex md:justify-between flex-col-reverse gap-2 md:flex-row">
+    <div class="flex md:justify-between flex-col-reverse md:flex-row">
         <div class="flex">
             <button @click="previous" :class="(pageAktif > 1) ? '' : 'pointer-events-none text-gray-50 bg-gray-700'" class="inline-flex items-center px-4 py-2 mr-3 text-sm font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-900">
-                <svg aria-hidden="true" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
-                </svg>
+                <ArrowPanjang></ArrowPanjang>
                 Previous
             </button>
             <button @click="next" :class="(pagination.has_next_page) ? '' : 'pointer-events-none text-gray-50 bg-gray-700'" class="px-4 py-2 inline-flex items-center text-sm font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-900">
                 Next
-                <svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                </svg>
+                <ArrowPanjang class="rotate-180"></ArrowPanjang>
             </button>
         </div>
-        <p class="text-sm font-medium">Page
+        <p class="text-sm font-medium md:mt-0 mt-2">Page
             <input type="number" name="pageAktif" min="1" class="w-max text-sm p-2 font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-950" @change="debouncePage" @input="debouncePage" :max="pagination.last_visible_page" v-model="pageAktif">
             of {{ pagination.last_visible_page }}
         </p>
@@ -23,9 +19,13 @@
 
 <script>
     import { debounce } from 'lodash'
+    import ArrowPanjang from './icons/ArrowPanjang.vue';
 
     export default{
         name: "Pagination",
+        components: {
+            ArrowPanjang
+        },
         computed: {
             pagination() {
                 return this.$store.state.pagination
