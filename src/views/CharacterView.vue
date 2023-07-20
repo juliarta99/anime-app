@@ -13,7 +13,16 @@
                     <DetailCharacter :character="character"></DetailCharacter>
                 </template>
                 <template #fallback>
-                    Loading....
+                    <div class="md:w-10/12 w-full py-5 px-8 mx-auto mt-5 rounded-md bg-white">
+                        <div class="bg-slate-100 animate-pulse rounded-sm h-5 w-1/2 mx-auto"></div>
+                        <div class="flex-col md:flex-row flex gap-4 my-4 w-full justify-center">
+                            <div class="bg-slate-100 animate-pulse rounded-md h-80 w-64 mx-auto"></div>
+                            <div class="w-full">
+                                <div v-for="(index) in 6" :key="index" class="bg-slate-100 animate-pulse mt-1 rounded-sm h-5 w-full"></div>
+                                <div class="bg-slate-100 animate-pulse rounded-sm h-40 w-full"></div>
+                            </div>
+                        </div>
+                    </div>
                 </template>
             </Suspense>
             <Suspense>
@@ -21,7 +30,15 @@
                     <GalleryCharacter :characterPictures="characterPictures"></GalleryCharacter>
                 </template>
                 <template #fallback>
-                    Loading....
+                    <div class="w-full md:w-10/12 py-5 px-8 mx-auto rounded-md bg-white">
+                        <div class="w-2/6 h-8 animate-pulse bg-slate-100 mt-2 mx-auto"></div>
+                        <div class="grid lg:grid-cols-7 md:grid-cols-5 sm:grid-cols-4 grid-cols-3 grid-cols-xs gap-4 mt-2">
+                        <div v-for="(index) in 7" :key="index" class="w-full animate-pulse bg-white">
+                            <div class="h-40 w-full rounded-md animate-pulse bg-slate-100"></div>
+                        </div>
+                        </div>
+                        <div class="w-2/6 h-8 animate-pulse bg-slate-100 mt-2 mx-auto"></div>
+                    </div>
                 </template>
             </Suspense>
         </div>
